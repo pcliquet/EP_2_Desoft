@@ -49,6 +49,8 @@ def lista_movimentos_possiveis(lista,n):
     valor_1 = extrai_valor(lista[n])
     valor_2 = extrai_valor(lista[n-1])
     valor_3 = extrai_valor(lista[n-3])
+    if n > len(lista):
+        return 'Não é possivel movimentar'
     if n == 0 :
         return 'Não é possivel movimentar'
     if naipe_1 == naipe_2 or valor_1 == valor_2:
@@ -65,31 +67,7 @@ def lista_movimentos_possiveis(lista,n):
         return mov
         
 
-# def lista_movimentos_possiveis(lista,n):
-#     i = 0
-#     poss_1 = False
-#     poss_2 = False
-#     mov = []
-#     naipe_1 = extrai_naipe(lista[n])
-#     naipe_2 = extrai_naipe(lista[n-1])
-#     naipe_3 = extrai_naipe(lista[n-3])
-#     valor_1 = extrai_valor(lista[n])
-#     valor_2 = extrai_valor(lista[n-1])
-#     valor_3 = extrai_valor(lista[n-3])
-#     if n == 0 :
-#         #return 'Não é possivel movimentar'
-#         return mov
-#     if naipe_1 == naipe_2 or valor_1 == valor_2:
-#         poss_1 = True
-#         mov.append(1)    
-#     if n - 3 < 0:
-#         return mov
-#     if naipe_1 == naipe_3 or valor_1 == valor_3:
-#         poss_2 = True 
-#         mov.append(3)
-#     else:
-#         return mov
-#print(lista_movimentos_possiveis(baralho,5))
+
 
 lista = ['6♥', 'J♥', '9♣', '9♥']
 def empilha(lista,o,d):
@@ -100,3 +78,27 @@ def empilha(lista,o,d):
         n_bara.append(items)
     return n_bara
 print(empilha(lista,1,0))
+
+
+def possui_movimentos_possiveis(lista):
+    l = 1
+    poss_3 = False
+    poss_4 = False
+    while l < len(lista)-1:
+        naipe_1 = extrai_naipe(lista[l])
+        naipe_2 = extrai_naipe(lista[l-1])
+        naipe_3 = extrai_naipe(lista[l-3])
+        valor_1 = extrai_valor(lista[l])
+        valor_2 = extrai_valor(lista[l-1])
+        valor_3 = extrai_valor(lista[l-3])
+        if l-3 < 0:
+            poss_2 = False
+        if naipe_1 == naipe_2 or valor_1 == valor_2:
+            poss_3 = True
+        if naipe_1 == naipe_3 or valor_1 == valor_3:
+            poss_4 = True 
+        l+=1
+    if poss_3 == True or poss_4 == True:
+        return True
+    else:
+        return False

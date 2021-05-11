@@ -1,4 +1,4 @@
-from baralho import cria_baralho, extrai_naipe, extrai_valor, lista_movimentos_possiveis, empilha
+from baralho import cria_baralho, extrai_naipe, extrai_valor, lista_movimentos_possiveis, empilha, possui_movimentos_possiveis
 print('')
 print('')
 print('')
@@ -19,39 +19,97 @@ print('')
 print('')
 print('Aperte [ENTER] para começar:')
 
+#Constantes
+i = 1
+des = 1
 jogar = False
+cria_b = False
+
+#inicializa o jogo
 res_1 = input('')
 if res_1 == '':
     jogar = True
-i = 1
-
-des = 1
+    cria_b = True
 
 
-#Cria o baralho
-baralho = cria_baralho()
-naipe = extrai_naipe(baralho[0])
-print(naipe)
+
 #Jogo
 while jogar == True:
-    
+
+    #Cria baralho
+    if cria_b == True:
+        baralho = cria_baralho()
+        cria_b = False
+
+
+    #Layout do Baralho
     for items in baralho:
         print('{0}.'.format(i), items)
         i+=1
-    perg_1 = int(input('escolha uma posição de 1 a {0} '.format(i-1))) -1
-    if perg_1 == 100:
-        fim = input('voce qure jogar novamente? (sim/nao)')
-        if fim =='nao':
-            jogar = False
+
+
+    #Movimento do jogador
+    while True:
+        perg_1 = int(input('escolha uma posição de 1 a {0}: '.format(i-1))) -1
+        if perg_1 >= len(baralho):
+            print('Numero invalido')
+        else:
+            break    
 
     verifica = lista_movimentos_possiveis(baralho,perg_1) 
-    print(verifica)
-    if len(verifica) > 1:
-        des = int(input('Em qual carta deseja empilhar? \n 1.{0}\n 2.{1}\n'.format(baralho[perg_1 - 1],baralho[perg_1 - 3])))
-    baralho = empilha(baralho,perg_1, verifica[des - 1])  
 
+    #Verifica o movimento e aplica
+    if verifica != 'Não é possivel movimentar':
+        if len(verifica) == 1:
+            des = verifica[0]
+        if len(verifica) != 1:
+            des = input('Em qual carta deseja empilhar? \n 1.{0}\n 2.{1}\n'.format(baralho[perg_1 - 1],baralho[perg_1 - 3]))
+            if des == '1':
+                des = 1
+            if des == '2':
+                des = 3
 
+        
+        #Atualiza o baralho
+        print('você empilhou {0} na posição do {1}'.format(baralho[perg_1],baralho[perg_1-des]))
+        
+        baralho = empilha(baralho,perg_1, perg_1-des) 
+        while True:
+            perg_3 = input('Quer imprimir o novo baralho? Ou quer analisar assim mesmo? (aperte [Enter] para novo baralho, ou digite algo para repetir a pergunta) ')
+            if perg_3 == '':
+                break
+    if verifica == 'Não é possivel movimentar':
+        print( 'Não é possivel movimentar')
 
+        #Pergunta se o jogador quer continuar o jogo
+        while True:
+            perg_3 = input('Deseja continuar? (aperte [Enter] para continuar, ou digite nao para finalizar o jogo) ')
+            if perg_3 == '':
+                break
+            if perg_3 =='nao':
+                jogar = False
+
+    #Verifica se é possivel jogar
+    jogar = possui_movimentos_possiveis(baralho)
+    print(jogar)
     
-    
+    # Verifica se o jogador ganhou ou perdeu o jogo
+    if jogar == False and len(baralho) > 1:
+        print('Você Perdeu')
+        nova = input('Quer jogar novamente?(sim/nao) ')
+        if nova == 'sim':
+            jogar = True
+            cria_b = True
+        else:
+            break
+    if jogar == False and len(baralho) ==1:
+        print('Você ganhou')
+        nova = input('Quer jogar novamente?(sim/nao) ')
+        if nova == 'sim':
+            jogar = True
+            cria_b = True
+        if nova == 'nao':
+            jogar = False
     i = 1
+
+
