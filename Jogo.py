@@ -26,11 +26,11 @@ print('Seu objetivo é conseguir empilhar todo o baralho respeitando essas condi
 print('')
 print('')
 print('')
-print('1. As duas cartas possuem o mesmo valor')
-print('2. As duas cartas possuem o mesmo naipe')
+print('1. As duas cartas devem possuir o mesmo valor')
+print('2. As duas cartas devem possuir o mesmo naipe')
 print('========================================')
-print('Você pode empilhar comparando com a ultima carta que você moveu ou com a de dois movimentos anteriores')
-print('A carta selecionar ocupará a posição da que você escolheu sobrepor')
+print('Você pode empilhar comparando naipe ou valor da carta escolhida com a carta anterior, ou de tres cartas acima da sua.')
+print('A carta selecionar ocupará a posição da outra que escolher sobrepor')
 print('')
 print('')
 print('Aperte [ENTER] para começar:')
@@ -110,7 +110,7 @@ while jogar == True:
     
     # Verifica se o jogador ganhou ou perdeu o jogo
     if pos == False and len(baralho) > 2:
-        print('Você Perdeu')
+        print('Não há nenhum movimento possível, você Perdeu')
         nova = input('Quer jogar novamente?(sim/nao) ')
         if nova == 'sim':
             jogar = True
