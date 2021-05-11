@@ -1,5 +1,21 @@
 from baralho import cria_baralho, extrai_naipe, extrai_valor, lista_movimentos_possiveis, empilha, possui_movimentos_possiveis
-print('')
+#Constantes
+i = 1
+des = 1
+jogar = False
+cria_b = False
+
+#Cores
+RED   = "\033[1;31m" 
+GREEN = "\033[0;32m"
+CYAN  = "\033[1;36m"
+BLUE  = "\033[1;34m"
+BOLD    = "\033[;1m"
+RESET = "\033[0;0m"
+REVERSE = "\033[;7m"
+MAGENTA = "\u001b[35m"
+
+print(RESET + '')
 print('')
 print('')
 print('Paciencia Acordeão')
@@ -19,11 +35,6 @@ print('')
 print('')
 print('Aperte [ENTER] para começar:')
 
-#Constantes
-i = 1
-des = 1
-jogar = False
-cria_b = False
 
 #inicializa o jogo
 res_1 = input('')
@@ -41,16 +52,26 @@ while jogar == True:
         baralho = cria_baralho()
         cria_b = False
 
-
+    print('Situação atual:')
+    print('===============')
     #Layout do Baralho
     for items in baralho:
-        print('{0}.'.format(i), items)
+        if extrai_naipe(items) == '♠':
+            print( RESET + '{0}.'.format(i), MAGENTA + items)
+        if extrai_naipe(items) == '♥':
+            print(RESET + '{0}.'.format(i), RED + items)
+        if extrai_naipe(items) == '♦':
+            print(RESET + '{0}.'.format(i), GREEN+ items)
+        if extrai_naipe(items) == '♣':
+            print(RESET + '{0}.'.format(i),BLUE+ items)
+
         i+=1
 
 
     #Movimento do jogador
     while True:
-        perg_1 = int(input('escolha uma posição de 1 a {0}: '.format(i-1))) -1
+        print(BOLD + 'escolha uma posição de 1 a {0}: '.format(i-1))
+        perg_1 = int(input()) -1
         if perg_1 >= len(baralho):
             print('Numero invalido')
         else:
