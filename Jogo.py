@@ -15,8 +15,10 @@ RESET = "\033[0;0m"
 REVERSE = "\033[;7m"
 MAGENTA = "\u001b[35m"
 
+
+print(GREEN + 'Trabalho da matéria design de software')
+print('Aluno:\nPedro Cliquet do Amaral')
 print(RESET + '')
-print('')
 print('')
 print('Paciencia Acordeão')
 print("==================")
@@ -33,7 +35,7 @@ print('Você pode empilhar comparando naipe ou valor da carta escolhida com a ca
 print('A carta selecionar ocupará a posição da outra que escolher sobrepor')
 print('')
 print('')
-print('Aperte [ENTER] para começar:')
+print('Aperte' + RED + ' [ENTER] ' + RESET + 'para começar:')
 
 
 #inicializa o jogo
@@ -70,10 +72,14 @@ while jogar == True:
 
     #Movimento do jogador
     while True:
-        print(BOLD + 'escolha uma posição de 1 a {0}: '.format(i-1))
+        print(BOLD + 'Escolha uma posição de 1 a {0}: '.format(i-1))
         perg_1 = int(input()) -1
         if perg_1 >= len(baralho):
             print('Numero invalido')
+        if perg_1 == 0:
+            print( 'Não é possivel movimentar')
+            print('Digite outra posição')
+            print('')
         else:
             break    
 
@@ -97,10 +103,12 @@ while jogar == True:
         baralho = empilha(baralho,perg_1, perg_1-des) 
         while True:
             perg_3 = input('Quer imprimir o novo baralho? Ou quer analisar assim mesmo? (aperte [Enter] para novo baralho, ou digite algo para repetir a pergunta) ')
+            print("")
             if perg_3 == '':
                 break
     if verifica == 'Não é possivel movimentar':
         print( 'Não é possivel movimentar')
+        print('')
 
 
 
@@ -111,6 +119,7 @@ while jogar == True:
     # Verifica se o jogador ganhou ou perdeu o jogo
     if pos == False and len(baralho) > 2:
         print('Não há nenhum movimento possível, você Perdeu')
+        print('')
         nova = input('Quer jogar novamente?(sim/nao) ')
         if nova == 'sim':
             jogar = True
@@ -119,6 +128,7 @@ while jogar == True:
             break
     if pos == False and len(baralho) == 1:
         print('Você ganhou')
+        print('')
         nova = input('Quer jogar novamente?(sim/nao) ')
         if nova == 'sim':
             jogar = True
