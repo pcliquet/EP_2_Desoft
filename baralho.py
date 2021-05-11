@@ -1,5 +1,6 @@
 import random
 
+#Função que Cria baralho
 def cria_baralho():
     lis = []
     carta = []
@@ -29,15 +30,18 @@ baralho = cria_baralho()
 
 #print(baralho)
 
+#Extrai o naipe da carta
 def extrai_naipe(string):
     tam = len(string)
     return string[tam-1]
 
+#Extrai o valor da carta
 def extrai_valor(string):
     tam = len(string)
     res = string[:tam-1]
     return res
 
+#Verifica os possiveis movimentos
 def lista_movimentos_possiveis(lista,n):
     i = 0
     poss_1 = False
@@ -59,8 +63,11 @@ def lista_movimentos_possiveis(lista,n):
     if naipe_1 == naipe_3 or valor_1 == valor_3:
         poss_2 = True 
         mov.append(3)
+    if len(lista)< 4:
+        mov = []
+        mov.append(1)
     if poss_1 == True and poss_2 == True:
-        return mov, 'Qual carta deseja empilhar \n' '1.{0}\n 2.{0}'.format(lista[n-1],lista[n-3])
+        return mov
     if poss_1 == False and poss_2 == False:
         return 'Não é possivel movimentar'
     if poss_1 == True or poss_2 == True:
@@ -68,8 +75,7 @@ def lista_movimentos_possiveis(lista,n):
         
 
 
-
-lista = ['6♥', 'J♥', '9♣', '9♥']
+#Empilhador de cartas
 def empilha(lista,o,d):
     lista[d] = lista[o]
     del lista[o]
@@ -77,9 +83,10 @@ def empilha(lista,o,d):
     for items in lista:
         n_bara.append(items)
     return n_bara
-print(empilha(lista,1,0))
 
 
+
+#Verifica se ainda é possivel jogar
 def possui_movimentos_possiveis(lista):
     l = 1
     poss_3 = False

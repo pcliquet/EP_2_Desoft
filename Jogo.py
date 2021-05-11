@@ -57,7 +57,7 @@ while jogar == True:
             break    
 
     verifica = lista_movimentos_possiveis(baralho,perg_1) 
-
+    
     #Verifica o movimento e aplica
     if verifica != 'Não é possivel movimentar':
         if len(verifica) == 1:
@@ -81,20 +81,14 @@ while jogar == True:
     if verifica == 'Não é possivel movimentar':
         print( 'Não é possivel movimentar')
 
-        #Pergunta se o jogador quer continuar o jogo
-        while True:
-            perg_3 = input('Deseja continuar? (aperte [Enter] para continuar, ou digite nao para finalizar o jogo) ')
-            if perg_3 == '':
-                break
-            if perg_3 =='nao':
-                jogar = False
+
 
     #Verifica se é possivel jogar
-    jogar = possui_movimentos_possiveis(baralho)
-    print(jogar)
+    pos = possui_movimentos_possiveis(baralho)
+    
     
     # Verifica se o jogador ganhou ou perdeu o jogo
-    if jogar == False and len(baralho) > 1:
+    if pos == False and len(baralho) > 2:
         print('Você Perdeu')
         nova = input('Quer jogar novamente?(sim/nao) ')
         if nova == 'sim':
@@ -102,7 +96,7 @@ while jogar == True:
             cria_b = True
         else:
             break
-    if jogar == False and len(baralho) ==1:
+    if pos == False and len(baralho) == 1:
         print('Você ganhou')
         nova = input('Quer jogar novamente?(sim/nao) ')
         if nova == 'sim':
