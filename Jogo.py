@@ -73,13 +73,17 @@ while jogar == True:
     #Movimento do jogador
     while True:
         print(BOLD + 'Escolha uma posição de 1 a {0}: '.format(i-1))
-        perg_1 = int(input()) -1
+        perg = input()
+        
+        perg_1 = int(perg) -1
         if perg_1 >= len(baralho):
             print('Numero invalido')
-        if perg_1 == 0:
+        if perg_1 <= 0:
             print( 'Não é possivel movimentar')
             print('Digite outra posição')
             print('')
+            
+        
         else:
             break    
 
